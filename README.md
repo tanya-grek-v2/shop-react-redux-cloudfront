@@ -1,3 +1,10 @@
+## URLs
+CloudFront URL [https://d3qj354d3srimn.cloudfront.net](https://d3qj354d3srimn.cloudfront.net).
+
+S3-website URL [http://online-shop-backet.s3-website-eu-west-1.amazonaws.com/](http://online-shop-backet.s3-website-eu-west-1.amazonaws.com/).
+
+-----------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

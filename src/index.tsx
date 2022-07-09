@@ -7,6 +7,20 @@ import {Provider} from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import axios from 'axios';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+import teal from '@material-ui/core/colors/teal';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: teal[500],
+    },
+    secondary: {
+      main: deepPurple[300],
+    },
+  },
+});
 
 axios.interceptors.response.use(
   response => {
@@ -25,7 +39,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <CssBaseline/>
-      <App/>
+      <ThemeProvider theme={theme}>
+        <App/>
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
