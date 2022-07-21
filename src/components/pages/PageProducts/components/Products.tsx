@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,10 +12,7 @@ import { formatAsPrice } from 'utils/utils';
 import AddProductToCart from 'components/AddProductToCart/AddProductToCart';
 import axios from 'axios';
 import API_PATHS from 'constants/apiPaths';
-import Product from './Product';
 import Button from '@material-ui/core/Button';
-
-// import productList from "./productList.json";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -36,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Products() {
   const classes = useStyles();
+  const history = useHistory();
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [openItem, setOpen] = useState<{ index: number; product: IProduct } | null>(null);
 
   useEffect(() => {
     axios.get(`${API_PATHS.products}`)
@@ -66,19 +64,13 @@ export default function Products() {
             </CardContent>
             <CardActions>
               <AddProductToCart product={product} />
-              <Button variant="outlined" color="primary" onClick={() => setOpen({ index, product })}>
+              <Button variant="outlined" color="primary" onClick={() => history.push(`${product.id}`)}>
                 More Info
               </Button>
             </CardActions>
           </Card>
         </Grid>
       ))}
-      {openItem && (
-        <Product
-          setOpen={setOpen}
-          openItem={openItem}
-        />
-      )}
     </Grid>
   );
 }
