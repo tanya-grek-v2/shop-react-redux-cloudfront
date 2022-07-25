@@ -26,6 +26,14 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
+  addProductToCart: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  cardActions: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
@@ -42,16 +50,14 @@ export default function Products() {
       .then(res => setProducts(res.data.data));
   }, []);
 
-  console.log(products)
-
   return (
     <Grid container spacing={4}>
-      {products.map((product: IProduct, index: number) => (
+      {products.map((product: IProduct) => (
         <Grid item key={product.id} xs={12} sm={6} md={4}>
           <Card className={classes.card}>
             <CardMedia
               className={classes.cardMedia}
-              image={`https://source.unsplash.com/random?sig=${index}`}
+              image={product.image}
               title="Image title"
             />
             <CardContent className={classes.cardContent}>
@@ -62,8 +68,10 @@ export default function Products() {
                 {formatAsPrice(product.price)}
               </Typography>
             </CardContent>
-            <CardActions>
-              <AddProductToCart product={product} />
+            <CardActions className={classes.cardActions}>
+              <div className={classes.addProductToCart}>
+                <AddProductToCart product={product} />
+              </div>
               <Button variant="outlined" color="primary" onClick={() => history.push(`${product.id}`)}>
                 More Info
               </Button>

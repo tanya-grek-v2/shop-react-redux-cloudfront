@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Slide from '@material-ui/core/Slide';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -39,11 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  // @ts-ignore
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 export default function Product() {
   const classes = useStyles();
   const { id } = useParams<{ id: string }>();
@@ -55,7 +49,7 @@ export default function Product() {
 
         setProduct(res.data.data)
       });
-  }, []);
+  }, [id])
 
   if (!product) {
     return <div>Sorry, this product was not found</div>
@@ -66,8 +60,8 @@ export default function Product() {
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}
-          image={`https://source.unsplash.com/random?sig=${1}`}
-          title="Image title"
+          image={product.image}
+          title="Product Image"
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
