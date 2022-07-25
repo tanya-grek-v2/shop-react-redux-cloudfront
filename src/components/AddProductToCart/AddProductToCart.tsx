@@ -29,9 +29,12 @@ export default function AddProductToCart({product}: AddProductToCartProps) {
             <Typography align="center">
               {cartItem.count}
             </Typography>
-            <IconButton onClick={() => dispatch(addToCart(product))}>
-              <Add color={"secondary"}/>
-            </IconButton>
+            {cartItem.count < product.count && (
+                <IconButton onClick={() => dispatch(addToCart(product))}>
+                  <Add color={"secondary"}/>
+                </IconButton>
+              )
+            }
             </>
         )
         :
